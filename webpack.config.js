@@ -1,20 +1,24 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+//const ExtractTextPlugin = require('extract-text-webpack-plugin'); works with webpack v3
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+process.env.NODE__ENV = process.env.NODE__ENV || 'development';
 
-if (process.env.NODE_ENV === 'test') {
+if(process.env.NODE__ENV === 'test'){
   require('dotenv').config({ path: '.env.test' });
-} else if (process.env.NODE_ENV === 'development') {
+} else if(process.env.NODE__ENV === 'development'){
   require('dotenv').config({ path: '.env.development' });
 }
 
+//process.env.NODE__ENV
+
 module.exports = (env) => {
   const isProduction = env === 'production';
-  const CSSExtract = new ExtractTextPlugin('styles.css');
-
+  //const CSSExtract = new ExtractTextPlugin('styles.css'); also works with webpack v3
+  const CSSExtract = new MiniCssExtractPlugin({ filename: 'styles.css' });
   return {
+    mode: env,
     entry: ['babel-polyfill', './src/app.js'],
     output: {
       path: path.join(__dirname, 'public', 'dist'),
@@ -27,22 +31,21 @@ module.exports = (env) => {
         exclude: /node_modules/
       }, {
         test: /\.s?css$/,
-        use: CSSExtract.extract({
-          use: [
-            {
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
               loader: 'css-loader',
               options: {
-                sourceMap: true
+                  sourceMap: true
               }
-            },
-            {
+          },
+          {
               loader: 'sass-loader',
               options: {
-                sourceMap: true
+                  sourceMap: true
               }
-            }
-          ]
-        })
+          }
+      ]
       }]
     },
     plugins: [
@@ -54,7 +57,7 @@ module.exports = (env) => {
         'process.env.FIREBASE_PROJECT_ID': JSON.stringify(process.env.FIREBASE_PROJECT_ID),
         'process.env.FIREBASE_STORAGE_BUCKET': JSON.stringify(process.env.FIREBASE_STORAGE_BUCKET),
         'process.env.FIREBASE_MESSAGING_SENDER_ID': JSON.stringify(process.env.FIREBASE_MESSAGING_SENDER_ID)
-      })
+       })
     ],
     devtool: isProduction ? 'source-map' : 'inline-source-map',
     devServer: {

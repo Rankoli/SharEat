@@ -1,14 +1,28 @@
-import { firebase, googleAuthProvider } from '../firebase/firebase';
+import Api from '../../server/api';
+import history from '../routers/AppRouter';
 
-export const login = (uid) => ({
+
+export const login = ({Email,Password,ID}) => ({
   type: 'LOGIN',
-  uid
+  Email,
+  Password,
+  ID
 });
 
-export const startLogin = () => {
-  return () => {
-    return firebase.auth().signInWithPopup(googleAuthProvider);
-  };
+export const startLogin = (email,pass) => {
+  return (dispatch) => {
+    return Api.post("/Login",{email,pass}).then((Response) => {
+      const user = JSON.parse(Response.data.d);
+      if(user != null) {
+        dispatch(login(user));
+      }
+      else {
+        alert('error email or password');
+      }
+    }).catch((error) => {
+      console.log(error);
+    })
+};
 };
 
 export const logout = () => ({
@@ -16,7 +30,7 @@ export const logout = () => ({
 });
 
 export const startLogout = () => {
-  return () => {
-    return firebase.auth().signOut();
+  return (dispatch) => {
+    return dispatch(logout());
   };
 };

@@ -1,7 +1,10 @@
 .text-input {
-  border: 1px solid #cacccd;
+  //border: 1px solid #cacccd;
+  border: none;
+  border-bottom:solid 3px #000000;
   height: 50px;
   font-size: $font-size-large;
+  font-family: 'Rubik', sans-serif;
   font-weight: 300;
   padding: $s-size;
 }

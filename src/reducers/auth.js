@@ -1,8 +1,13 @@
+
+
 export default (state = {}, action) => {
   switch (action.type) {
     case 'LOGIN':
+      console.log(state,action)
       return {
-        uid: action.uid
+        Email: action.Email,
+        Password: action.Password,
+        ID: action.ID
       };
     case 'LOGOUT':
       return {};

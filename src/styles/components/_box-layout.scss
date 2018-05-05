@@ -1,15 +1,23 @@
 .box-layout {
   align-items: center;
-  background: url('/images/bg.jpg');
-  background-size: cover;
+  //background: url('/images/bg.jpg');
+  background: url('/images/bg.png');
+  background-size: contain;
+  background-repeat: no-repeat;
   display: flex;
   height: 100vh;
   justify-content: center;
   width: 100vw;
 }
 
+.box-layout img {
+    position: fixed;
+    bottom: 0;
+    right: 159px;
+}
+
 .box-layout__box {
-  background: fade-out(white, .15);
+  background: fade-out($off-white, .15); //white
   border-radius: 3px;
   padding: $l-size $m-size;
   text-align: center;
