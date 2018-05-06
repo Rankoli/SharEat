@@ -7,6 +7,7 @@ export const PublicRoute = ({
   component: Component,
   ...rest
 }) => (
+  console.log('publicroute',isAuthenticated),
     <Route {...rest} component={(props) => (
       isAuthenticated ? (
         <Redirect to="/dashboard" />
@@ -17,7 +18,7 @@ export const PublicRoute = ({
   );
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: !!state.auth.ID
+  isAuthenticated: !!localStorage.getItem("user")
 });
 
 export default connect(mapStateToProps)(PublicRoute);

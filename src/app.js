@@ -31,16 +31,10 @@ setTimeout(() => {
 },1500)
 
 
-// store.subscribe(() => {
-//   if(user){
-//     console.log(store.getState());
-//     history.push('/dashboard');
-//   }
-// })
 
 
 store.subscribe(() => {
-  if ( store.getState().auth) {
+  if (store.getState().auth) {
         if (history.location.pathname === '/') {
           history.push('/dashboard');
         }

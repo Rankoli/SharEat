@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {startLogin} from '../actions/auth';
+import validator from 'validator';
 
 export class LoginPage extends React.Component {
   constructor(props) {
@@ -37,7 +38,6 @@ export class LoginPage extends React.Component {
           <h1 className="box-layout__title">SharEat</h1>
           <p>Office Food Ordering. Simplified.</p>
           <form className="form" onSubmit={this.onSubmit}>
-            {this.state.error && <p className="form__error">{this.state.error}</p>}
             <input
               type="email"
               placeholder="Email"
@@ -51,6 +51,7 @@ export class LoginPage extends React.Component {
               className="text-input"
               value={this.state.pass}
               onChange={this.onpassChage}/>
+              {this.state.error && <p className="form__error">{this.state.error}</p>}
             <button className="button">Login</button>
           </form>
         </div>

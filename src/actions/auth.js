@@ -2,7 +2,7 @@ import Api from '../../server/api';
 import history from '../routers/AppRouter';
 
 
-export const login = ({Email,Password,ID}) => ({
+export const login = ({Email,Password,ID} = {}) => ({
   type: 'LOGIN',
   Email,
   Password,
@@ -14,6 +14,7 @@ export const startLogin = (email,pass) => {
     return Api.post("/Login",{email,pass}).then((Response) => {
       const user = JSON.parse(Response.data.d);
       if(user != null) {
+        localStorage.setItem("user",user.ID);
         dispatch(login(user));
       }
       else {
@@ -31,6 +32,7 @@ export const logout = () => ({
 
 export const startLogout = () => {
   return (dispatch) => {
+    localStorage.removeItem("user");
     return dispatch(logout());
   };
 };

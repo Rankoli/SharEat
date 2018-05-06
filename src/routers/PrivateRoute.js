@@ -8,6 +8,7 @@ export const PrivateRoute = ({
   component: Component,
   ...rest
 }) => (
+    console.log('privateroute',isAuthenticated),
     <Route {...rest} component={(props) => (
       isAuthenticated ? (
         <div>
@@ -21,7 +22,7 @@ export const PrivateRoute = ({
   );
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: !!state.auth.ID
+  isAuthenticated: !!localStorage.getItem("user")
 });
 
 export default connect(mapStateToProps)(PrivateRoute);
