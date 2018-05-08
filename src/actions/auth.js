@@ -13,6 +13,7 @@ export const startLogin = (email,pass) => {
   return (dispatch) => {
     return Api.post("/Login",{email,pass}).then((Response) => {
       const user = JSON.parse(Response.data.d);
+      console.log(user);
       if(user != null) {
         localStorage.setItem("user",user.ID);
         dispatch(login(user));

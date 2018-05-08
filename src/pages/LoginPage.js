@@ -35,8 +35,8 @@ export class LoginPage extends React.Component {
     return (
       <div className="box-layout">
         <div className="box-layout__box">
-          <h1 className="box-layout__title">SharEat</h1>
-          <p>Office Food Ordering. Simplified.</p>
+          <img src="/images/logologin.png"/>
+          <p className="form__title">Office Food Ordering. Simplified.</p>
           <form className="form" onSubmit={this.onSubmit}>
             <input
               type="email"
@@ -47,11 +47,10 @@ export class LoginPage extends React.Component {
               onChange={this.onEmailChage}/>
             <input
               type="password"
-              placeholder="pass"
+              placeholder="Password"
               className="text-input"
               value={this.state.pass}
-              onChange={this.onpassChage}/>
-              {this.state.error && <p className="form__error">{this.state.error}</p>}
+              onChange={this.onpassChage}/> {this.state.error && <p className="form__error">{this.state.error}</p>}
             <button className="button">Login</button>
           </form>
         </div>
