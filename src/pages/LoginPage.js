@@ -28,7 +28,12 @@ export class LoginPage extends React.Component {
       this.setState(() => ({error: ""}));
       this
         .props
-        .startLogin(this.state.email, this.state.pass);
+        .startLogin(this.state.email, this.state.pass)
+        .then(() => {
+          if (this.props.isAuthenticated) {
+            this.setState(() => ({error: this.props.errorMassege}));
+          }
+        });
     }
   };
   render() {
@@ -58,12 +63,18 @@ export class LoginPage extends React.Component {
     )
   }
 }
-//onClick={this.props.startLogin}
+
 const mapDispatchToProps = (dispatch) => ({
-  startLogin: (email, pass) => dispatch(startLogin(email, pass))
+  startLogin: (email, pass) => dispatch(startLogin(email, pass)),
+  logout: () => dispatch(logout())
 });
 
-export default connect(undefined, mapDispatchToProps)(LoginPage);
+const mapStateToProps = (state) => ({
+  isAuthenticated: !!state.auth.msg,
+  errorMassege: state.auth.msg
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
 
 // export const LoginPage = ({ startLogin }) => (   <div className="box-layout">
 //     <div className="box-layout__box">       <h1

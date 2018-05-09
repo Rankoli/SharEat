@@ -1,3 +1,5 @@
+
+
 export default (state = {}, action) => {
   switch (action.type) {
     case 'LOGIN':
@@ -8,6 +10,11 @@ export default (state = {}, action) => {
       };
     case 'LOGOUT':
       return {};
+
+    case 'ERROR':
+      return {
+        msg:action.msg
+      };
     default:
       return state;
   }

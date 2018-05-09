@@ -2,6 +2,11 @@ import Api from '../../server/api';
 import history from '../routers/AppRouter';
 
 
+export const error = (msg) => ({
+  type: 'ERROR',
+  msg
+});
+
 export const login = ({Email,Password,ID} = {}) => ({
   type: 'LOGIN',
   Email,
@@ -13,13 +18,12 @@ export const startLogin = (email,pass) => {
   return (dispatch) => {
     return Api.post("/Login",{email,pass}).then((Response) => {
       const user = JSON.parse(Response.data.d);
-      console.log(user);
       if(user != null) {
         localStorage.setItem("user",user.ID);
         dispatch(login(user));
       }
       else {
-        alert('error email or password');
+        dispatch(error('Error email or password.'));
       }
     }).catch((error) => {
       console.log(error);

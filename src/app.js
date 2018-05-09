@@ -34,13 +34,14 @@ setTimeout(() => {
 
 
 store.subscribe(() => {
-  if (store.getState().auth) {
+  if (store.getState().auth.msg === undefined) {
         if (history.location.pathname === '/') {
           history.push('/dashboard');
         }
       } else {
-        store.dispatch(logout());
-        history.push('/');
+        //console.log(store.getState().auth.msg);
+        //store.dispatch(logout());
+        //history.push('/');
       }
 });
 
