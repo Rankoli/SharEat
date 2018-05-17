@@ -2,7 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {startLogin} from '../actions/auth';
 import validator from 'validator';
-
+import axios from 'axios';
+ let x = 1;
 export class LoginPage extends React.Component {
   constructor(props) {
     super(props);
