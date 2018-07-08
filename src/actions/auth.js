@@ -7,27 +7,31 @@ export const error = (msg) => ({
   msg
 });
 
-export const login = ({Email,Password,ID} = {}) => ({
+export const login = ({Email,Password,ID,Role} = {}) => ({
   type: 'LOGIN',
   Email,
   Password,
-  ID
+  ID,
+  Role
 });
 
 export const startLogin = (email,pass) => {
   return (dispatch) => {
+
     return Api.post("/Login",{email,pass}).then((Response) => {
+
       const user = JSON.parse(Response.data.d);
+
       if(user != null) {
         localStorage.setItem("user",user.ID);
-        dispatch(login(user));
+          dispatch(login(user));
       }
       else {
         dispatch(error('Error email or password.'));
       }
     }).catch((error) => {
       console.log(error);
-    })
+    });
 };
 };
 

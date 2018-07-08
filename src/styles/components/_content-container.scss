@@ -1,5 +1,18 @@
 .content-container {
   margin: 0 auto;
-  padding: 0 $m-size;
-  max-width: 80rem;
+  padding: 0 $s-size;
+  max-width: 30rem;
+}
+
+.burger-container{
+  display: flex;
+  flex-direction: column;
+  padding-top: 0;
+
+}
+
+.burger-list-items{
+  display: flex;
+  padding-top: $m-size;
+  justify-content: center;
 }

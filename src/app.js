@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import AppRouter, { history } from './routers/AppRouter';
 import configureStore from './store/configureStore';
-import { login, logout } from './actions/auth';
+import { login, startLogout } from './actions/auth';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css';;
@@ -34,15 +34,19 @@ setTimeout(() => {
 
 
 store.subscribe(() => {
-  if (store.getState().auth.msg === undefined) {
-        if (history.location.pathname === '/') {
+
+  if (store.getState().auth.msg === undefined && store.getState().auth.Role === 2) {
+        if (history.location.pathname === '/'  ) {
           history.push('/dashboard');
         }
-      } else {
-        //console.log(store.getState().auth.msg);
-        //store.dispatch(logout());
-        //history.push('/');
-      }
+      } else if(store.getState().auth.msg === undefined && store.getState().auth.Role === 1) {
+        if (history.location.pathname === '/'  ) {
+          history.push('/DevPage');
+        }
+       }//else {
+      //   // startLogout();
+      //   // history.push('/');
+      // }
 });
 
 

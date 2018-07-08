@@ -31,6 +31,7 @@ export class LoginPage extends React.Component {
         .props
         .startLogin(this.state.email, this.state.pass)
         .then(() => {
+
           if (this.props.isAuthenticated) {
             this.setState(() => ({error: this.props.errorMassege}));
           }

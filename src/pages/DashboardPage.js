@@ -3,7 +3,7 @@ import React from 'react';
 
 const DashboardPage = () => (
   <div>
-    Dashboard page content
+    worker Dashboard page content
   </div>
 );
 

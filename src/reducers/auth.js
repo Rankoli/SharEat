@@ -6,7 +6,8 @@ export default (state = {}, action) => {
       return {
         Email: action.Email,
         Password: action.Password,
-        ID: action.ID
+        ID: action.ID,
+        Role: action.Role
       };
     case 'LOGOUT':
       return {};
